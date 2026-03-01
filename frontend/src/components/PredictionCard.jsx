@@ -37,8 +37,8 @@ export default function PredictionCard({ result }) {
 
   return (
     <div>
+        <p></p>
       <div className="section-title">Prediction</div>
-
       {fields.map(({ label, value, isTitle, hint }) => (
         <div key={label} style={{ marginBottom: 8 }}>
           {isTitle ? (

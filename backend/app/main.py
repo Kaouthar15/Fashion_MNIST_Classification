@@ -1,7 +1,8 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from app.utils import preprocess
 from app.inference import run_inference
+from app.evaluate import evaluate_calibration  
 
 app = FastAPI()
 
@@ -14,9 +15,11 @@ app.add_middleware(
 )
 
 @app.post("/predict")
-async def predict(file: UploadFile = File(...), n_samples: int = 30):
-
+async def predict(
+    file: UploadFile = File(...),
+    n_samples: int = 30,
+    true_label: int = None   
+):
     image = preprocess(file.file)
-    result = run_inference(image, n_samples)
-
+    result = run_inference(image, n_samples, true_label=true_label)
     return result

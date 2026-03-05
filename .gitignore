@@ -15,7 +15,7 @@ env/
 *.pt
 *.pth
 
-# Saved models folder
+# Saved models folders
 backend/saved_models/
 
 # Logs
